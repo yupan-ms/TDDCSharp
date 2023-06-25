@@ -6,14 +6,14 @@ I will first tell you the business goals and then the requirements one by one.
 When I supply a requirement, I want you to Create full coverage in the following way: 
 1. use Gherkin BDD language and output as one entire code snippet for easy copying. 
 2. Provide positive and negative scenarios. 
-3. Ensure all common steps you create are added as a Gherkin 'Background' 
+3. Ensure all common steps you create are added as a Gherkin 'Background'.
 4. Ensure 'Background' is provided only once and is placed after the user Story and before 
-the scenarios 
-5. Ensure all variables used are created as a Gherkin 'Scenario Outline' 
+the scenarios. 
+5. Ensure all variables used are created as a Gherkin 'Scenario Outline'. 
 6. Ensure variables added to a Gherkin 'Examples' table appropriately. 
 7. Include feature level tags and scenario level tags e.g. @valid, @invalid.@feature-example, 
-@smoke-test.@regression-test 
-8. provide feature and user story 
+@smoke-test.@regression-test .
+8. provide feature and user story .
 9. Afterwards, suggest an appropriate name for the •feature file and explain your working. 
 10. Do not assume any output like error messages or variables not part of the requirements. 
 
