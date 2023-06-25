@@ -1,0 +1,225 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Uqs Appointment Booking Api",
+        "description": "A booking solution that aims to do the following: \n • Market the available hairdressing services. \n • Allow a customer to book an appointment with a specific or a random barber. \n • Give barbers a rest between appointments, usually 5 minutes. \n • Barbers have various shifts in the shop and they are off work on different days, so the solution should take care of picking free slots based on the availability of barbers. \n • Time saving by not having to arrange appointments on the phone or in person. \n",
+        "contact": {
+            "name": "Author",
+            "url": "https://bing.com"
+        },
+        "version": "v1"
+    },
+    "paths": {
+        "/appointmentbooking/v1/employees": {
+            "get": {
+                "tags": [
+                    "Endpoints"
+                ],
+                "operationId": "GetAvailableEmployees",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AvailableEmployees"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/appointmentbooking/v1/services/{id}": {
+            "get": {
+                "tags": [
+                    "Endpoints"
+                ],
+                "operationId": "GetService",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Service"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/appointmentbooking/v1/services": {
+            "get": {
+                "tags": [
+                    "Endpoints"
+                ],
+                "operationId": "GetAvailableServices",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AvailableServices"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/appointmentbooking/v1/slots/{serviceId}/{employeeId}": {
+            "get": {
+                "tags": [
+                    "Endpoints"
+                ],
+                "operationId": "GetAvailableSlots",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "employeeId",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AvailableSlots"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AvailableEmployees": {
+                "type": "object",
+                "properties": {
+                    "employees": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Employee"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AvailableServices": {
+                "type": "object",
+                "properties": {
+                    "services": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Service"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AvailableSlots": {
+                "type": "object",
+                "properties": {
+                    "daysSlots": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DaySlots"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "DaySlots": {
+                "type": "object",
+                "properties": {
+                    "day": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "times": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Employee": {
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Service": {
+                "type": "object",
+                "properties": {
+                    "serviceId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "duration": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}
